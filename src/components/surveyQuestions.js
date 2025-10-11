@@ -30,8 +30,8 @@ export const templateSurveyQuestions = [
         conditionalNext: {
             condition: "Q0",
             routes: [
-                { value: 1, next: "Q3a" },  // If Q0 == 1, show Q3a (origin)
-                { value: 2, next: "Q3b" }   // If Q0 == 2, show Q3b (destination)
+                { value: 1, next: "Q3_A" },  // If Q0 == 1, show Q3_A (origin)
+                { value: 2, next: "Q3_B" }   // If Q0 == 2, show Q3_B (destination)
             ]
         },
         options: [
@@ -40,19 +40,19 @@ export const templateSurveyQuestions = [
         ]
     },
 
-    // 🌍 Q3a. Flight Origin (for arriving passengers)
+    // 🌍 Q3_A. Flight Origin (for arriving passengers)
     {
-        id: "Q3a",
+        id: "Q3_A",
         text: "quel est l'origine de votre vol ? (Ville + pays)",
         type: 'freeText',
         freeTextPlaceholder: "Ex: Paris, France",
         next: "Q4",
         condition: { questionId: "Q0", value: 1 },
-        fallbackNext: "Q3b"
+        fallbackNext: "Q3_B"
     },
-    // 🌍 Q3b. Flight Destination (for departing passengers)
+    // 🌍 Q3_B. Flight Destination (for departing passengers)
     {
-        id: "Q3b",
+        id: "Q3_B",
         text: "quelle est la destination de votre vol ? (Ville + pays)",
         type: 'freeText',
         freeTextPlaceholder: "Ex: Rome, Italie",
@@ -98,6 +98,7 @@ export const templateSurveyQuestions = [
         id: "Q6",
         text: "Quel est le motif principal de votre voyage ?",
         type: 'singleChoice',
+        next: "Q7_A",  // Default next for departing passengers (will be overridden by conditionalNext)
         conditionalNext: {
             condition: "Q0",
             routes: [
@@ -120,11 +121,12 @@ export const templateSurveyQuestions = [
         text: "Précisez le motif de votre voyage :",
         type: 'freeText',
         freeTextPlaceholder: "Décrivez le motif...",
+        next: "Q7_A",  // Default next for departing passengers (will be overridden by conditionalNext)
         conditionalNext: {
             condition: "Q0",
             routes: [
-                { value: 1, next: "Q7b" },  // If Q0 == 1 (arriving), show Q7b
-                { value: 2, next: "Q7a" }   // If Q0 == 2 (departing), show Q7a
+                { value: 1, next: "Q7_B" },  // If Q0 == 1 (arriving), show Q7_B
+                { value: 2, next: "Q7_A" }   // If Q0 == 2 (departing), show Q7_A
             ]
         }
     },
@@ -142,7 +144,7 @@ export const templateSurveyQuestions = [
             { id: 2, text: "Covoiturage", next: "Q8_A" },
             { id: 3, text: "Taxi / VTC", next: "Q8_A" },
             { id: 4, text: "Train + Navette", next: "Q8_A" },
-            { id: 5, text: "Navette Beauvais–Paris", next: "Q9" },
+            { id: 5, text: "Navette Beauvais–Paris", next: "Q8_A" },
             { id: 6, text: "Autre précisez", next: "Q7_A_AUTRE" }
         ]
     },
@@ -171,7 +173,7 @@ export const templateSurveyQuestions = [
             { id: 2, text: "Covoiturage", next: "Q8_B" },
             { id: 3, text: "Taxi / VTC", next: "Q8_B" },
             { id: 4, text: "Train + Navette", next: "Q8_B" },
-            { id: 5, text: "Navette Beauvais–Paris", next: "Q9" },
+            { id: 5, text: "Navette Beauvais–Paris", next: "Q8_B" },
             { id: 6, text: "Autre", next: "Q7_B_AUTRE" }
         ]
     },
@@ -446,8 +448,7 @@ export const templateSurveyQuestions = [
         freeTextPlaceholder: "Votre nationalité",
         next: "Q16"
     },
-
-    // 🎂 Q16_a. Age Group
+    // 🎂 Q16_A. Age Group
     {
         id: "Q16",
         text: "À quelle tranche d'âge appartenez-vous ?",
