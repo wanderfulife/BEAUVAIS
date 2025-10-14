@@ -29,7 +29,9 @@ const pageTitle = ref('BEAUVAIS_AIRPORT'); // Browser tab title
 // Ensure posteTravailQuestionId is defined for the template
 const posteTravailQuestionId = null; // 🎯 Change this if your work station question has a different ID
 const customWelcomeMessage = ref(`
-Bonjour,</p> Nous réalisons une courte enquête pour mieux <p>comprendre l’utilisation de l’aéroport de Beauvais.</p> Cela prend moins de 4 minutes. Acceptez-vous d’y participer ? 
+Bonjour, Nous réalisons une courte enquête pour mieux comprendre l’utilisation de l’aéroport de Beauvais.</p> Cela prend moins de 4 minutes. Acceptez-vous d’y participer ? 
+<p><br></p>
+Hello, we are conducting a short survey to better understand the use of <p>Beauvais Airport.</p> It takes less than 4 minutes. Do you agree to answer a few questions?
 `); // HTML welcome message
 
 // 🎯 STEP 3: Set your survey questions
