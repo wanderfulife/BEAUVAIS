@@ -3,7 +3,7 @@
   <div class="form-group">
     <input class="form-control" type="text" v-model="postalCodeInput" @input="search"
       placeholder="Code postal (ex: 92, 54)" />
-    <input class="form-control" type="text" v-model="communeInput" @input="search" placeholder="Nom de la commune" />
+    <input class="form-control" type="text" v-model="communeInput" @input="search" placeholder="Nom de la commune / Pays" />
     <div v-if="showDropdown" class="commune-dropdown">
       <div v-for="item in filteredCommunes" :key="item['CODE INSEE']" @click="selectCommune(item)"
         class="commune-option">

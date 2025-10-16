@@ -271,14 +271,7 @@ export const templateSurveyQuestions = [
         id: "Q9_a",
         text: "Sur une échelle de 1 à 5, comment évaluez-vous la navette Beauvais–Paris ? (1 = pas du tout satisfait, 5 = très satisfait) / On a scale from 1 to 5, how would you rate the Beauvais–Paris Shuttle?",
         type: 'singleChoice',
-        next: "Q14",  // Default: go directly to profile questions
-        conditionalNext: {
-            condition: "Q0 == 2 AND Q2 == 2",
-            routes: [
-                { value: true, next: "Q10" },   // If Q0==2 AND Q2==2, go to stay questions
-                { value: false, next: "Q14" }   // Otherwise, go to profile questions
-            ]
-        },
+        next: "Q10",  // Navette users go to Q10, which has its own condition
         condition: "Q7_A == 5 OR Q7_B == 5",  // Only show to navette users
         fallbackNext: "Q10",  // For non-navette users who skip Q9_a, go to Q10 which has the condition
         options: [
@@ -289,7 +282,6 @@ export const templateSurveyQuestions = [
             { id: 5, text: "Très satisfait / Very satisfied" }
         ]
     },
-
 
 
     // ✈️ Q10. Stay Location
