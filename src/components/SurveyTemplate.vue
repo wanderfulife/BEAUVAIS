@@ -183,7 +183,7 @@
             <button
               @click="handleFreeTextAnswer"
               class="btn-next"
-              :disabled="!freeTextAnswer || String(freeTextAnswer).trim() === ''"
+              :disabled="!isValidFreeTextAnswer()"
             >
               {{ isLastQuestion ? "Terminer" : "Suivant" }}
             </button>
@@ -636,12 +636,31 @@ const handleMultipleChoiceAnswer = () => {
   nextQuestion(null);
 };
 
+// Helper function to check if free text answer is valid
+// This is especially important for numeric questions where 0 is a valid response
+const isValidFreeTextAnswer = () => {
+  if (!currentQuestion.value) return false;
+  if (freeTextAnswer.value === null || freeTextAnswer.value === undefined) return false;
+  
+  const answerStr = String(freeTextAnswer.value).trim();
+  
+  // For numeric questions, 0 is a valid response
+  if (currentQuestion.value.validation === 'numeric') {
+    // Check if it's a valid number
+    const numValue = Number(freeTextAnswer.value);
+    return !isNaN(numValue) && isFinite(numValue);
+  }
+  
+  // For non-numeric questions, check if not empty
+  return answerStr !== '';
+};
+
 const handleFreeTextAnswer = () => {
-  if (!currentQuestion.value || !freeTextAnswer.value) return;
+  if (!currentQuestion.value || !isValidFreeTextAnswer()) return;
   
   // Convert to string and trim for validation
   const answerValue = String(freeTextAnswer.value).trim();
-  if (!answerValue) return;
+  if (!answerValue && currentQuestion.value.validation !== 'numeric') return;
   
   recordAnswerToState(
     currentQuestion.value.id,
