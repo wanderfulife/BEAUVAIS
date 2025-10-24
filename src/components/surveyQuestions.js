@@ -136,15 +136,51 @@ export const templateSurveyQuestions = [
         id: "Q7_A",
         text: "Quel moyen de transport avez-vous utilisé pour venir à l'aéroport de Beauvais ? / What mode of transport did you use to get to Beauvais Airport ?",
         type: 'singleChoice',
-        next: "Q8_A",
+        conditionalNext: {
+            condition: "Q2",
+            routes: [
+                { value: 1, next: "Q8d" },  // If Q2 == 1 (outbound flight), show Q8d
+                { value: 2, next: "Q8b" }   // If Q2 == 2 (return flight), show Q8b
+            ]
+        },
         condition: { questionId: "Q0", value: 2 },
-        fallbackNext: "Q8_A",
+        fallbackNext: "Q9_a",
         options: [
-            { id: 1, text: "Voiture personnelle / Private car", next: "Q8_A" },
-            { id: 2, text: "Covoiturage / Carpooling", next: "Q8_A" },
-            { id: 3, text: "Taxi / VTC", next: "Q8_A" },
-            { id: 4, text: "Train + Navette / Train + Shuttle", next: "Q8_A" },
-            { id: 5, text: "Navette Beauvais–Paris / Beauvais–Paris Shuttle", next: "Q8_A" },
+            { id: 1, text: "Voiture personnelle / Private car", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8d" },
+                    { value: 2, next: "Q8b" }
+                ]
+            }},
+            { id: 2, text: "Covoiturage / Carpooling", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8d" },
+                    { value: 2, next: "Q8b" }
+                ]
+            }},
+            { id: 3, text: "Taxi / VTC", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8d" },
+                    { value: 2, next: "Q8b" }
+                ]
+            }},
+            { id: 4, text: "Train + Navette / Train + Shuttle", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8d" },
+                    { value: 2, next: "Q8b" }
+                ]
+            }},
+            { id: 5, text: "Navette Beauvais–Paris / Beauvais–Paris Shuttle", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8d" },
+                    { value: 2, next: "Q8b" }
+                ]
+            }},
             { id: 6, text: "Autre précisez / Other please specify", next: "Q7_A_AUTRE" }
         ]
     },
@@ -155,9 +191,15 @@ export const templateSurveyQuestions = [
         text: "Précisez le moyen de transport utilisé pour venir à l'aéroport : / Please specify :",
         type: 'freeText',
         freeTextPlaceholder: "Décrivez le moyen de transport...",
-        next: "Q8_A",
+        conditionalNext: {
+            condition: "Q2",
+            routes: [
+                { value: 1, next: "Q8d" },  // If Q2 == 1 (outbound flight), show Q8d
+                { value: 2, next: "Q8b" }   // If Q2 == 2 (return flight), show Q8b
+            ]
+        },
         condition: { questionId: "Q0", value: 2 },
-        fallbackNext: "Q8_A"
+        fallbackNext: "Q9_a"
     },
 
     // 🚗 Q7_B. Transport from Airport (for arriving passengers)
@@ -165,15 +207,51 @@ export const templateSurveyQuestions = [
         id: "Q7_B",
         text: "Quel moyen de transport allez-vous utiliser en sortant de l'aéroport ? / What mode of transport will you use when leaving the airport ?",
         type: 'singleChoice',
-        next: "Q8_B",
+        conditionalNext: {
+            condition: "Q2",
+            routes: [
+                { value: 1, next: "Q8a" },  // If Q2 == 1 (outbound flight), show Q8a
+                { value: 2, next: "Q8c" }   // If Q2 == 2 (return flight), show Q8c
+            ]
+        },
         condition: { questionId: "Q0", value: 1 },
-        fallbackNext: "Q8_B",
+        fallbackNext: "Q9_a",
         options: [
-            { id: 1, text: "Voiture personnelle / Private car", next: "Q8_B" },
-            { id: 2, text: "Covoiturage / Carpooling", next: "Q8_B" },
-            { id: 3, text: "Taxi / VTC", next: "Q8_B" },
-            { id: 4, text: "Train + Navette / Train + Shuttle", next: "Q8_B" },
-            { id: 5, text: "Navette Beauvais–Paris / Beauvais–Paris Shuttle", next: "Q8_B" },
+            { id: 1, text: "Voiture personnelle / Private car", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8a" },
+                    { value: 2, next: "Q8c" }
+                ]
+            }},
+            { id: 2, text: "Covoiturage / Carpooling", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8a" },
+                    { value: 2, next: "Q8c" }
+                ]
+            }},
+            { id: 3, text: "Taxi / VTC", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8a" },
+                    { value: 2, next: "Q8c" }
+                ]
+            }},
+            { id: 4, text: "Train + Navette / Train + Shuttle", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8a" },
+                    { value: 2, next: "Q8c" }
+                ]
+            }},
+            { id: 5, text: "Navette Beauvais–Paris / Beauvais–Paris Shuttle", conditionalNext: {
+                condition: "Q2",
+                routes: [
+                    { value: 1, next: "Q8a" },
+                    { value: 2, next: "Q8c" }
+                ]
+            }},
             { id: 6, text: "Autre / Other please specify", next: "Q7_B_AUTRE" }
         ]
     },
@@ -184,59 +262,115 @@ export const templateSurveyQuestions = [
         text: "Précisez le moyen de transport que vous allez utiliser en sortant de l'aéroport : / Please specify :",
         type: 'freeText',
         freeTextPlaceholder: "Décrivez le moyen de transport...",
-        next: "Q8_B",
+        conditionalNext: {
+            condition: "Q2",
+            routes: [
+                { value: 1, next: "Q8a" },  // If Q2 == 1 (outbound flight), show Q8a
+                { value: 2, next: "Q8c" }   // If Q2 == 2 (return flight), show Q8c
+            ]
+        },
         condition: { questionId: "Q0", value: 1 },
-        fallbackNext: "Q8_B"
+        fallbackNext: "Q9_a"
     },
 
-    // 🔄 Q8_A. Same Transport for Return (for departing passengers)
+    // 🔄 Q8a. Same Transport for Return to Airport (for arriving passengers with outbound flight)
     {
-        id: "Q8_A",
-        text: "Allez-vous utiliser le même moyen de transport pour le retour ? / Will you use the same mode of transport for your return journey ?",
+        id: "Q8a",
+        text: "Allez-vous utiliser le même moyen de transport pour le retour pour venir à l'aéroport ? / Will you use the same mode of transport for the return trip to the airport ?",
         type: 'singleChoice',
-        next: "Q9",  // Go to Q9 if navette was selected in Q7_A
-        condition: { questionId: "Q0", value: 2 },
-        fallbackNext: "Q9_a",  // Fallback if needed
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 1 AND Q2 == 1",
+        fallbackNext: "Q9",
         options: [
             { id: 1, text: "Oui / Yes", next: "Q9" },
-            { id: 2, text: "Non / No", next: "Q8_A_AUTRE" }
+            { id: 2, text: "Non / No", next: "Q8a_AUTRE" }
         ]
     },
 
-    // 📝 Q8_A Other Transport for Return
+    // 📝 Q8a Other Transport for Return to Airport
     {
-        id: "Q8_A_AUTRE",
-        text: "Précisez le moyen de transport que vous utiliserez pour le retour : / Please specify :",
+        id: "Q8a_AUTRE",
+        text: "Si non, précisez : / If no, please specify :",
         type: 'freeText',
-        freeTextPlaceholder: "Décrivez le moyen de transport...",
-        next: "Q9",  // Always go to Q9, but Q9 will be conditionally shown  
-        condition: { questionId: "Q0", value: 2 },
-        fallbackNext: "Q9_a"  // Fallback if needed
+        freeTextPlaceholder: "Précisez le moyen de transport...",
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 1 AND Q2 == 1",
+        fallbackNext: "Q9"
     },
 
-    // 🔄 Q8_B. Same Transport for Arrival (for arriving passengers)
+    // 🔄 Q8b. Same Transport for Departure from Airport (for departing passengers with return flight)
     {
-        id: "Q8_B",
-        text: "Aviez-vous utilisé le même moyen de transport pour venir à l'aéroport lors de votre vol aller ? / Did you use the same mode of transport to get to the airport for your outbound flight ?",
+        id: "Q8b",
+        text: "Aviez-vous utilisé le même moyen de transport pour partir de l'aéroport lors de votre vol aller ? / Did you use the same mode of transport to leave the airport for your outbound flight ?",
         type: 'singleChoice',
-        next: "Q9",  // Always go to Q9, but Q9 will be conditionally shown
-        condition: { questionId: "Q0", value: 1 },
-        fallbackNext: "Q9_a",  // Fallback if needed
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 2 AND Q2 == 2",
+        fallbackNext: "Q9",
         options: [
             { id: 1, text: "Oui / Yes", next: "Q9" },
-            { id: 2, text: "Non / No", next: "Q8_B_AUTRE" }
+            { id: 2, text: "Non / No", next: "Q8b_AUTRE" }
         ]
     },
 
-    // 📝 Q8_B Other Transport for Arrival
+    // 📝 Q8b Other Transport for Departure from Airport
     {
-        id: "Q8_B_AUTRE",
-        text: "Précisez le moyen de transport que vous aviez utilisé pour venir à l'aéroport : / Please specify :",
+        id: "Q8b_AUTRE",
+        text: "Si non, précisez : / If no, please specify :",
         type: 'freeText',
-        freeTextPlaceholder: "Décrivez le moyen de transport...",
-        next: "Q9",  // Always go to Q9, but Q9 will be conditionally shown  
-        condition: { questionId: "Q0", value: 1 },
-        fallbackNext: "Q9_a"  // Fallback if needed
+        freeTextPlaceholder: "Précisez le moyen de transport...",
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 2 AND Q2 == 2",
+        fallbackNext: "Q9"
+    },
+
+    // 🔄 Q8c. Same Transport for Arrival to Airport (for arriving passengers with return flight) 
+    {
+        id: "Q8c",
+        text: "Aviez-vous utilisé le même moyen de transport à l'aller pour venir à l'aéroport ? / Did you use the same mode of transport for the outbound trip to the airport ?",
+        type: 'singleChoice',
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 1 AND Q2 == 2",
+        fallbackNext: "Q9",
+        options: [
+            { id: 1, text: "Oui / Yes", next: "Q9" },
+            { id: 2, text: "Non / No", next: "Q8c_AUTRE" }
+        ]
+    },
+
+    // 📝 Q8c Other Transport for Arrival to Airport
+    {
+        id: "Q8c_AUTRE",
+        text: "Si non, précisez : / If no, please specify :",
+        type: 'freeText',
+        freeTextPlaceholder: "Précisez le moyen de transport...",
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 1 AND Q2 == 2",
+        fallbackNext: "Q9"
+    },
+
+    // 🔄 Q8d. Same Transport for Return from Airport (for departing passengers with outbound flight)
+    {
+        id: "Q8d",
+        text: "Allez-vous utiliser le même moyen de transport pour le retour pour partir de l'aéroport ? / Will you use the same mode of transport for the return trip from the airport ?",
+        type: 'singleChoice',
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 2 AND Q2 == 1",
+        fallbackNext: "Q9",
+        options: [
+            { id: 1, text: "Oui / Yes", next: "Q9" },
+            { id: 2, text: "Non / No", next: "Q8d_AUTRE" }
+        ]
+    },
+
+    // 📝 Q8d Other Transport for Return from Airport
+    {
+        id: "Q8d_AUTRE",
+        text: "Si non, précisez : / If no, please specify :",
+        type: 'freeText',
+        freeTextPlaceholder: "Précisez le moyen de transport...",
+        next: "Q9",  // Go to Q9, which will be conditionally shown based on navette selection
+        condition: "Q0 == 2 AND Q2 == 1",
+        fallbackNext: "Q9"
     },
 
     // 🚌 Q9. Navette Choice Reason 
